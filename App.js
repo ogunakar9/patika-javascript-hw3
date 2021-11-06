@@ -76,6 +76,26 @@ const menu = [
 const section = document.querySelector(".section-center");
 const btnContainer = document.querySelector(".btn-container");
 
+const categories = menu.reduce(
+  (total, item) => {
+    if (!total.includes(item.category)) {
+      total.push(item.category);
+    }
+    return total;
+  },
+  ["All"]
+);
+
+const categoryDisplay = () => {
+  const categoryFilterButtons = categories
+    .map((item) => {
+      return `<button class="btn btn-outline-dark btn-item" data-id=${item}>${item}</button>`;
+    })
+    .join("");
+
+  btnContainer.innerHTML = categoryFilterButtons;
+};
+
 const menuDisplay = (menuItems) => {
   const cards = menuItems.map((item) => {
     return `<div class="menu-items col-lg-6 col-sm-12">
@@ -101,3 +121,4 @@ const menuDisplay = (menuItems) => {
 };
 
 menuDisplay(menu);
+categoryDisplay();
