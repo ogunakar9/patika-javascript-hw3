@@ -94,6 +94,20 @@ const categoryDisplay = () => {
     .join("");
 
   btnContainer.innerHTML = categoryFilterButtons;
+  const btnItems = document.querySelectorAll(".btn-item");
+
+  btnItems.forEach((item) => {
+    item.addEventListener("click", (e) => {
+        const targetFilter = e.target.dataset.id;
+        const filteredMenu = menu.filter((item) => item.category === targetFilter);
+
+        if (targetFilter === "All") {
+            menuDisplay(menu);
+        } else {
+            menuDisplay(filteredMenu);
+        }
+    })
+  });
 };
 
 const menuDisplay = (menuItems) => {
